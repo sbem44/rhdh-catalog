@@ -1,0 +1,34 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: HTTP-testing
+  title: Http testing for POST and GET 
+  description: Testing http request functionalities with POST and GET
+spec:
+  owner: a-team
+  ownedBy: group:default/a-team
+  type: service
+  parameters:
+    - title: Insert parameters 
+      properties:
+        functionalArea:
+          title: Functional area
+          type: string
+          description: The functional area of new project
+          ui:autofocus: true
+
+  steps:
+    - id: post-project
+      name: Create new project
+      action: http:backstage:request
+      input:
+        method: 'POST'
+        path: '/mockapi/api/v1/project'
+        headers:
+          content-type: 'application/json'
+        body:
+          area: '{{ parameters.functionalArea }}'
+  output:
+    getResponse: '{{ steps.backstage_request.output.body }}'
+    getCode: '{{ steps.backstage_request.output.code }}'
+    getHeaders: '{{ steps.backstage_request.output.headers }}'
