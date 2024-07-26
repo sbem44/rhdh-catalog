@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: HTTP-testing
-  title: Http testing for POST and GET 
+  title: Http testing for POST and GET v2
   description: Testing http request functionalities with POST and GET
 spec:
   owner: a-team
@@ -38,4 +38,4 @@ spec:
     text:
     - title: Projects
       content: |
-        `${{ steps['get-projects'].output.body }}`
+        `${{ steps['get-projects'].output.body | dump}}`
