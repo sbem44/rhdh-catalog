@@ -23,7 +23,7 @@ spec:
       action: http:backstage:request
       input:
         method: 'POST'
-        path: '/mockapi/api/v1/project'
+        path: '/proxy/mockapi/api/v1/project'
         headers:
           content-type: 'application/json'
         body:
