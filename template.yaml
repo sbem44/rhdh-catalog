@@ -27,7 +27,7 @@ spec:
         headers:
           content-type: 'application/json'
         body:
-          area: '{{ parameters.functionalArea }}'
+          area: ${{ parameters.functionalArea }}
   output:
     getResponse: '{{ steps.backstage_request.output.body }}'
     getCode: '{{ steps.backstage_request.output.code }}'
