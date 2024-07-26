@@ -1,0 +1,22 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: a-website
+  description: Test website for A team
+spec:
+  type: website
+  lifecycle: production
+  owner: a-team
+  system: a-system
+  ownedBy: group:default/a-team
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: b-website
+  description: Test website for B team
+spec:
+  type: website
+  lifecycle: production
+  owner: b-team
+  system: b-system

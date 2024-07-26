@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: a-system
+  description: System A 
+spec:
+  owner: a-team
+  domain: macro-area-funzionale
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: b-system
+  description: System B
+spec:
+  owner: b-team
+  domain: macro-area-funzionale

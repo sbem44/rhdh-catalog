@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: a-domain
+  description: Domain A
+spec:
+  owner: a-team
+---
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: b-domain
+  description: Domain B
+spec:
+  owner: b-team

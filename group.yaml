@@ -1,0 +1,24 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: a-team
+  description: A team
+spec:
+  type: team
+  profile:
+    displayName: A team
+    email: ateam@murdock.com
+  children: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: b-team
+  description: B team
+spec:
+  type: team
+  profile:
+    displayName: B team
+    email: bteam@nobody.com
+  children: []
+

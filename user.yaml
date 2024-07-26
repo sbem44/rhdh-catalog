@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: "13625"
+spec:
+  profile:
+    displayName: Manuel Bertuzzi
+    email: mbertuzz@redhat.com
+    picture: https://i0.wp.com/ppsa.upenn.edu/wp-content/uploads/2018/09/black-cat-icon-flat-01-.jpg
+  memberOf: [a-team]
