@@ -35,5 +35,7 @@ spec:
         method: 'GET'
         path: '/proxy/mockapi/api/v1/project'
   output:
-    getResponse: '{{ steps.get-projects.output.body }}'
-    getCode: '{{ steps.get-projects.output.code }}'
+    text:
+    - title: Projects
+      content: |
+        `${{ steps['get-projects'].output.body }}`
