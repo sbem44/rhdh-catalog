@@ -28,7 +28,12 @@ spec:
           content-type: 'application/json'
         body:
           area: ${{ parameters.functionalArea }}
+    - id: get-projects
+      name: Retrieve all projects
+      action: http:backstage:request
+      input:
+        method: 'GET'
+        path: '/proxy/mockapi/api/v1/project'
   output:
-    getResponse: '{{ steps.backstage_request.output.body }}'
-    getCode: '{{ steps.backstage_request.output.code }}'
-    getHeaders: '{{ steps.backstage_request.output.headers }}'
+    getResponse: '{{ steps.get-projects.output.body }}'
+    getCode: '{{ steps.get-projects.output.code }}'
