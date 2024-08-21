@@ -20,5 +20,16 @@ spec:
   profile:
     displayName: B team
     email: bteam@nobody.com
+  children: [b-subteam]
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: b-subteam
+  description: B subteam
+spec:
+  type: team
+  profile:
+    displayName: B subteam
+    email: bsubteam@nobody.com
   children: []
-
