@@ -16,6 +16,13 @@ spec:
           type: string
           description: The functional area of new project
           ui:autofocus: true
+        category:
+          title: Category
+          type: string
+          ui:field: DynamicPickExtension
+          ui:options:
+            # IMPORTANT: The endpoint needs to return a JSON array of strings.
+            external_data: https://dummyjson.com/products/categories
 
   steps:
     - id: post-project
