@@ -20,3 +20,15 @@ spec:
   lifecycle: production
   owner: b-team
   system: b-system
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: admin-website
+  description: Test website for DEVHUB_Admin
+spec:
+  type: website
+  lifecycle: production
+  owner: DEVHUB_Admin
+  system: a-system
+  ownedBy: group:default/DEVHUB_Admin
