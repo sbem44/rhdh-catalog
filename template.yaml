@@ -22,7 +22,7 @@ spec:
           ui:field: DynamicPickExtension
           ui:options:
             # IMPORTANT: The endpoint needs to return a JSON array of strings.
-            external_data: https://dummyjson.com/products/categories
+            external_data: https://demo4654476.mockable.io/categories
 
   steps:
     - id: post-project
