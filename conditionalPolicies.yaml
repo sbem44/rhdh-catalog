@@ -1,0 +1,28 @@
+---
+result: CONDITIONAL
+roleEntityRef: 'role:default/test'
+pluginId: catalog
+resourceType: catalog-entity
+permissionMapping:
+  - read
+  - update
+conditions:
+  rule: IS_ENTITY_OWNER
+  resourceType: catalog-entity
+  params:
+    claims:
+      - 'group:default/team-a'
+      - 'group:default/team-b'
+---
+result: CONDITIONAL
+roleEntityRef: 'role:default/test'
+pluginId: catalog
+resourceType: catalog-entity
+permissionMapping:
+  - delete
+conditions:
+  rule: IS_ENTITY_OWNER
+  resourceType: catalog-entity
+  params:
+    claims:
+      - 'group:default/team-a'
