@@ -1,0 +1,43 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: test-dynamic-data-form
+  title: Test Dynamic Data Form
+  description: Test template
+spec:
+  owner: user:guest
+  type: service
+  parameters:
+  - title: Component Information
+    ui:ObjectFieldTemplate: TwoColumn
+    properties:
+      componentName:
+        title: Component Name
+        type: string
+        description: component name
+        ui:field: EntityPicker
+        ui:options:
+          catalogFilter:
+            - kind: Component
+      branchName:
+        title: Branch Name
+        type: string
+        description: branch where to apply the change
+      deployingPlatform:
+        title: Deploying Platform
+        type: string
+        description: Platform to deploy to (Tanzu or Openshift)
+        enum:
+          - Openshift
+          - Tanzu
+        uniqueItems: true
+  steps:
+    - id: debug-input
+      name: Debug input
+      action: debug:log
+      input:
+        message: This is input ${{ parameters.componentName }}
+  output:
+    text:
+      - title: Output
+        content: Input is ${{parameters.componentName}}
