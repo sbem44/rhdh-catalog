@@ -43,4 +43,4 @@ spec:
   lifecycle: production
   owner: DEVHUB_Admin
   system: a-system
-  ownedBy: group:default/DEVHUB_Admin
+  ownedBy: group:default/a-team
