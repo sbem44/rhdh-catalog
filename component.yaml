@@ -25,13 +25,12 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: admin-website
-  description: Test website for DEVHUB_Admin
+  description: Test website for B TEAM
 spec:
   type: website
   lifecycle: production
-  owner: DEVHUB_Admin
+  owner: b-team
   system: a-system
-  ownedBy: group:default/DEVHUB_Admin
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -43,4 +42,3 @@ spec:
   lifecycle: production
   owner: a-team
   system: a-system
-  ownedBy: group:default/a-team
