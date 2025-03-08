@@ -14,7 +14,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: b-website
-  description: Test website for B team
+  description: Test website for B team v2
 spec:
   type: website
   lifecycle: production
