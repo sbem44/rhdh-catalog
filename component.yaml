@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: a-website
-  description: Test website for A team
+  description: Test website for A team v2
   backstage.io/source-location: https://github.com/backstage/community-plugins
 spec:
   type: website
