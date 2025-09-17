@@ -4,6 +4,7 @@ metadata:
   name: a-website
   description: Test website for A team v2
   backstage.io/source-location: https://github.com/backstage/community-plugins
+  quay.io/repository-slug: rhdhdemo/demo
 spec:
   type: website
   lifecycle: production
