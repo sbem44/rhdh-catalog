@@ -2,9 +2,10 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: a-website
-  description: Test website for A team v2
+  description: Test website for A team v3
   backstage.io/source-location: https://github.com/backstage/community-plugins
-  quay.io/repository-slug: rhdhdemo/demo
+  annotations:
+    quay.io/repository-slug: rhdhdemo/demo
 spec:
   type: website
   lifecycle: production
