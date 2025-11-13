@@ -28,7 +28,8 @@ spec:
           type: string
           description: User that runs the template
           default: ${{ user.entityRef }}
-          ui:readonly: true
+          # ui:readonly: true
+          ui:widget: hidden
 
   steps:
     - id: post-project
