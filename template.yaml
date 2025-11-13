@@ -23,6 +23,12 @@ spec:
           ui:options:
             # IMPORTANT: The endpoint needs to return a JSON array of strings.
             external_data: https://demo4654476.mockable.io/categories
+        componentOwner:
+          title: User
+          type: string
+          description: User that runs the template
+          default: ${{ user.entityRef }}
+          ui:readonly: true
 
   steps:
     - id: post-project
