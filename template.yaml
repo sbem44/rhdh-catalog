@@ -31,9 +31,9 @@ spec:
           # ui:readonly: true
           # ui:widget: hidden
           ui:field: OwnerPicker
-          ui:backstage:
-            review:
-              show: false
+         # ui:backstage:
+           # review:
+           #   show: false
 
   steps:
     - id: post-project
