@@ -51,9 +51,9 @@ spec:
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: HTTP-testing-2
+  name: user-info-test
   title: User info testing v2.0
-  description: Testing http request functionalities with POST and GET
+  description: Testing retrive user info
 spec:
   owner: a-team
   ownedBy: group:default/a-team
