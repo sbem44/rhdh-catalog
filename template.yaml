@@ -77,7 +77,7 @@ spec:
           title: User
           type: string
           description: User that runs the template
-          default: ${{ user.id }}
+          default: ${{ user.ref }}
           # ui:readonly: true
           # ui:widget: hidden
           ui:field: OwnerPicker
@@ -90,33 +90,7 @@ spec:
       name: Say hello to the logged in user
       action: debug:log
       input:
-        message: Hello ${{ user.ref }}
-    - id: log-hello-id-ref
-      name: Say hello to the logged in user
-      action: debug:log
-      input:
-        message: Hello ${{ identity.userEntityRef }}
-    - id: log-hello-email
-      name: Say hello to the logged in user
-      action: debug:log
-      input:
-        message: Hello ${{ user.profile.email }}        
-    - id: post-project
-      name: Create new project
-      action: http:backstage:request
-      input:
-        method: 'POST'
-        path: '/proxy/mockapi/api/v1/project'
-        headers:
-          content-type: 'application/json'
-        body:
-          area: ${{ parameters.functionalArea }}
-    - id: get-projects
-      name: Retrieve all projects
-      action: http:backstage:request
-      input:
-        method: 'GET'
-        path: '/proxy/mockapi/api/v1/project'
+        message: Hello ${{ user.ref }}      
   output:
     text:
     - title: Projects
