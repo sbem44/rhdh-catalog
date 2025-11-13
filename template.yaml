@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: HTTP-testing-2
+  name: HTTP-testing
   title: Http testing for POST and GET v4.4
   description: Testing http request functionalities with POST and GET
 spec:
