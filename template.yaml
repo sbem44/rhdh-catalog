@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: HTTP-testing-2
-  title: Http testing for POST and GET v4.3
+  title: Http testing for POST and GET v4.4
   description: Testing http request functionalities with POST and GET
 spec:
   owner: a-team
@@ -41,7 +41,7 @@ spec:
       action: debug:log
       input:
         # Use Nunjucks template string to embed the parameter into a clear message
-        message: "DEBUG: The resolved component owner is: ${{ user.id }}"
+        message: ${{ user.id }}
     - id: post-project
       name: Create new project
       action: http:backstage:request
