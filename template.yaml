@@ -41,7 +41,7 @@ spec:
       action: debug:log
       input:
         # Use Nunjucks template string to embed the parameter into a clear message
-        message: "DEBUG: The resolved component owner is: ${{ parameters.componentOwner }}"
+        message: "DEBUG: The resolved component owner is: ${{ user.id }}"
     - id: post-project
       name: Create new project
       action: http:backstage:request
