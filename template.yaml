@@ -52,7 +52,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: user-info-test
-  title: User info testing v2.0
+  title: User info testing v3.0
   description: Testing retrive user info
 spec:
   owner: a-team
