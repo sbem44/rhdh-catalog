@@ -23,25 +23,9 @@ spec:
           ui:options:
             # IMPORTANT: The endpoint needs to return a JSON array of strings.
             external_data: https://demo4654476.mockable.io/categories
-        componentOwner:
-          title: User
-          type: string
-          description: User that runs the template
-          default: ${{ user.id }}
-          # ui:readonly: true
-          # ui:widget: hidden
-          ui:field: OwnerPicker
-         # ui:backstage:
-           # review:
-           #   show: false
+
 
   steps:
-    - id: debug-owner
-      name: Check Resolved Owner 
-      action: debug:log
-      input:
-        # Use Nunjucks template string to embed the parameter into a clear message
-        message: ${{ user.id }}
     - id: post-project
       name: Create new project
       action: http:backstage:request
@@ -68,7 +52,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: HTTP-testing-2
-  title: Http testing for POST and GET 2V1.1
+  title: User info testing v2.0
   description: Testing http request functionalities with POST and GET
 spec:
   owner: a-team
