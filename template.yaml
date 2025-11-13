@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: HTTP-testing
-  title: Http testing for POST and GET v4.0
+  title: Http testing for POST and GET v4.1
   description: Testing http request functionalities with POST and GET
 spec:
   owner: a-team
@@ -27,7 +27,7 @@ spec:
           title: User
           type: string
           description: User that runs the template
-          default: ${{ user.entityRef }}
+          default: ${{ user.id }}
           # ui:readonly: true
           # ui:widget: hidden
           ui:field: OwnerPicker
