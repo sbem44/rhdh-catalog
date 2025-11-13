@@ -63,3 +63,69 @@ spec:
     - title: Projects
       content: |
         `${{ steps['get-projects'].output.body | dump}}`
+---
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: HTTP-testing-2
+  title: Http testing for POST and GET 2V1.0
+  description: Testing http request functionalities with POST and GET
+spec:
+  owner: a-team
+  ownedBy: group:default/a-team
+  type: service
+  parameters:
+    - title: Insert parameters 
+      properties:
+        functionalArea:
+          title: Functional area
+          type: string
+          description: The functional area of new project
+          ui:autofocus: true
+        category:
+          title: Category
+          type: string
+          ui:field: DynamicPickExtension
+          ui:options:
+            # IMPORTANT: The endpoint needs to return a JSON array of strings.
+            external_data: https://demo4654476.mockable.io/categories
+        componentOwner:
+          title: User
+          type: string
+          description: User that runs the template
+          default: ${{ user.id }}
+          # ui:readonly: true
+          # ui:widget: hidden
+          ui:field: OwnerPicker
+         # ui:backstage:
+           # review:
+           #   show: false
+
+  steps:
+    - id: debug-owner
+      name: Check Resolved Owner 
+      action: debug:log
+      input:
+        # Use Nunjucks template string to embed the parameter into a clear message
+        message: ${{ user.id }}
+    - id: post-project
+      name: Create new project
+      action: http:backstage:request
+      input:
+        method: 'POST'
+        path: '/proxy/mockapi/api/v1/project'
+        headers:
+          content-type: 'application/json'
+        body:
+          area: ${{ parameters.functionalArea }}
+    - id: get-projects
+      name: Retrieve all projects
+      action: http:backstage:request
+      input:
+        method: 'GET'
+        path: '/proxy/mockapi/api/v1/project'
+  output:
+    text:
+    - title: Projects
+      content: |
+        `${{ steps['get-projects'].output.body | dump}}`
