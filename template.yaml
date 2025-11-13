@@ -107,7 +107,7 @@ spec:
       action: debug:log
       input:
         # Use Nunjucks template string to embed the parameter into a clear message
-        message: ${{ user.id }}
+        message: ${{ user.entityRef }}
     - id: post-project
       name: Create new project
       action: http:backstage:request
