@@ -102,12 +102,21 @@ spec:
            #   show: false
 
   steps:
-    - id: debug-owner
-      name: Check Resolved Owner 
+    - id: log-hello-ref
+      name: Say hello to the logged in user
       action: debug:log
       input:
-        # Use Nunjucks template string to embed the parameter into a clear message
-        message: ${{ user.entityRef }}
+        message: Hello ${{ user.ref }}
+    - id: log-hello-id-ref
+      name: Say hello to the logged in user
+      action: debug:log
+      input:
+        message: Hello ${{ identity.userEntityRef }}
+    - id: log-hello-email
+      name: Say hello to the logged in user
+      action: debug:log
+      input:
+        message: Hello ${{ user.profile.email }}        
     - id: post-project
       name: Create new project
       action: http:backstage:request
