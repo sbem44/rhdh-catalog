@@ -227,4 +227,6 @@ spec:
         data: {}
       
   output:
-    text: Template run successfully!
+    text:
+      - title: Success
+        content: Template run successfully!
