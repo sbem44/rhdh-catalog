@@ -108,13 +108,21 @@ spec:
   ownedBy: group:default/a-team
   type: service
   parameters:
-    - title: Fill in some steps
+    - title: Choose if last name is required 
       properties:
         includeName:
-          title: Include Name?
+          title: Include last name?
           type: boolean
           default: true
-  
+    - title: Write your name
+      required:
+        - name
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Unique name of the component
+          ui:autofocus: true
       dependencies:
         includeName:
           allOf:
