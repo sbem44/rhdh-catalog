@@ -110,7 +110,7 @@ spec:
   parameters:
     - title: Choose if last name is required 
       properties:
-        includeName:
+        includeLast:
           title: Include last name?
           type: boolean
           default: true
@@ -123,22 +123,23 @@ spec:
           type: string
           description: Unique name of the component
           ui:autofocus: true
-      dependencies:
-        includeName:
-          allOf:
-            - if:
-                properties:
-                  includeName:
-                    const: true
-              then:
-                properties:
-                  lastName:
-                    title: Last Name
-                    type: string
-                # You can use additional fields of parameters within conditional parameters such as required.
-                required:
-                  - lastName
-
+      # 1. Conditional Field
+        lastName:
+          title: Last Name (Conditional)
+          type: string
+          description: Please enter your last name (only visible if 'Include Last Name' was checked).
+          
+          # KEY USAGE: ui:visibility: ${{ parameters.includeLast }}
+          # This uses JSONata to evaluate a previously gathered parameter.
+          # If parameters.includeLast is true, the field is visible.
+          # If it's false, the field is hidden, and its default value ("") will be used.
+          ui:visibility: ${{ parameters.includeLast }} 
+          
+          # Make the field required ONLY when it is visible.
+          required: true 
+          
+          # When using visibility on a field that exists in a previous step (like we did for lastName), 
+          # RJSF intelligently handles updating the value in the second step.
   steps:
     - id: log-hello-ref
       name: Say hello
@@ -150,83 +151,3 @@ spec:
     - title: Projects
       content: |
         `${{ steps['get-projects'].output.body | dump}}`
----
-apiVersion: scaffolder.backstage.io/v1beta3
-kind: Template
-metadata:
-  name: conditional-step
-  title: Conditional Step Example 2
-  description: Demonstrates how to use conditional fields across different parameter steps.
-  tags:
-    - experimental
-    - tutorial
-spec:
-  owner: a-team
-  type: service
-  parameters:
-    # Step 1: Control Flag
-    - title: Choose Name Requirements
-      properties:
-        includeName:
-          title: Include Last Name?
-          type: boolean
-          description: If checked, a 'Last Name' field will appear below and be required.
-          default: true
-    
-    # Step 2: Name Input (Conditional field defined here)
-    - title: Write Your Name
-      required:
-        - name # 'name' is always required
-      properties:
-        name:
-          title: First Name
-          type: string
-          description: Unique first name of the component owner.
-          ui:autofocus: true
-        
-        # --- CONDITIONAL LOGIC START ---
-      dependencies:
-        # The dependency key (includeName) must match the field controlling the condition
-        includeName:
-          allOf:
-            - if:
-                properties:
-                  includeName:
-                    const: true # Condition: If 'includeName' is true
-              then:
-                properties:
-                  lastName: # The conditional field
-                    title: Last Name
-                    type: string
-                    description: The last name (Required when 'Include Last Name' is checked).
-                required:
-                  - lastName # Make 'lastName' required only when the condition is met
-              else:
-                properties:
-                  lastName: # Define the field even when it's hidden (to ensure it's in the final parameters)
-                    title: Last Name (Optional/Hidden)
-                    type: string
-                    description: The last name (Not required when unchecked).
-                    default: "" # IMPORTANT: Set a default value when hidden/optional to ensure the input is not null
-        # --- CONDITIONAL LOGIC END ---
-
-  steps:
-    - id: log-hello-ref
-      name: Say Hello
-      action: debug:log
-      input:
-        message: >
-          Hello, ${{ parameters.name }}${{ parameters.lastName ? ' ' + parameters.lastName : ' (No Last Name Provided)' }}!
-          The 'includeName' flag was set to: ${{ parameters.includeName }}
-    
-    - id: done
-      name: Mark as complete
-      action: roadiehq:utils:jsonata
-      input:
-        expression: "Congratulations! The template execution is complete."
-        data: {}
-      
-  output:
-    text:
-      - title: Success
-        content: Template run successfully!
