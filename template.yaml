@@ -101,36 +101,35 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: conditional-step
-  title: Conditional step
+  title: Conditional step v1.0
   description: test conditional fields 
 spec:
   owner: a-team
   ownedBy: group:default/a-team
   type: service
   parameters:
-    parameters:
-      - title: Fill in some steps
-        properties:
-          includeName:
-            title: Include Name?
-            type: boolean
-            default: true
-    
-        dependencies:
-          includeName:
-            allOf:
-              - if:
-                  properties:
-                    includeName:
-                      const: true
-                then:
-                  properties:
-                    lastName:
-                      title: Last Name
-                      type: string
-                  # You can use additional fields of parameters within conditional parameters such as required.
-                  required:
-                    - lastName
+    - title: Fill in some steps
+      properties:
+        includeName:
+          title: Include Name?
+          type: boolean
+          default: true
+  
+      dependencies:
+        includeName:
+          allOf:
+            - if:
+                properties:
+                  includeName:
+                    const: true
+              then:
+                properties:
+                  lastName:
+                    title: Last Name
+                    type: string
+                # You can use additional fields of parameters within conditional parameters such as required.
+                required:
+                  - lastName
 
   steps:
     - id: log-hello-ref
