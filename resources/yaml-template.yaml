@@ -15,7 +15,7 @@ replicas: 1
 
 resources: {}
   limits:
-    cpu: 200m
+    cpu: 800m
     memory: 200Mi
   requests:
     cpu: 100m

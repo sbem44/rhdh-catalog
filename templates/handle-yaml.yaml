@@ -1,0 +1,95 @@
+---
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: handle-yaml
+  title: Handle YAML file
+  description: Example template to retrieve and manipulate a YAML file
+spec:
+  owner: roadie
+  type: service
+
+  parameters:
+    - title: Repository
+      required:
+        - url
+      properties:
+        url:
+          title: URL
+          type: string
+          description: URL of the repo
+        filePath:
+          title: YAML file 
+          type: string
+          description: The relative path to the yaml file
+    - title: Values
+      required:
+        - name
+        - namespace
+      properties:
+        name:
+          title: Name
+          type: string
+          description: The name of the component
+        namespace: 
+          title: Namespace
+          type: string
+          description: The Openshift Namespace
+        reqCpu:
+          title: Requested cpu (millicore)
+          type: number
+          maximum: 800
+          minimum: 10
+          default: 100
+      
+  steps:
+    - id: fetch
+      name: Fetch repo
+      action: fetch:plain
+      input:
+        url: ${{ parameters.url }}
+    - id: update-name
+      name: Update name
+      action: roadiehq:utils:json:merge
+      input:
+        path: ${{ parameters.filePath}}
+        content:
+          name: ${{ parameters.name }}
+    - id: update-namespace
+      name: Update namespace
+      action: roadiehq:utils:json:merge
+      input:
+        path: ${{ parameters.filePath}}
+        content:
+          name: ${{ parameters.namespace }}
+    - id: update-namespace
+      name: Update namespace
+      action: roadiehq:utils:json:merge
+      input:
+        path: ${{ parameters.filePath}}
+        content:
+          namespace: ${{ parameters.namespace }}
+    - id: update-cpu
+      name: Update CPU
+      action: roadiehq:utils:json:merge
+      input:
+        path: ${{ parameters.filePath}}
+        content:
+          resources:
+            limits:
+              cpu: ${{ parameters.cpu}}
+    - id: publish-pr
+      name: Publish PR
+      action: publish:github:pull-request
+      input:
+        repoUrl: github.com?repo=rhdh-catalog&owner=sbem44
+        branchName: main
+        title: Merge YAML into ${{ parameters.path }}
+        description: This PR was created by a Backstage scaffolder task
+    - id: log-message
+      name: Log PR URL
+      action: debug:log
+      input:
+        message: 'RemoteURL: ${{ steps["publish-pr"].output.remoteUrl }}'
+  output:
+    yaml: ${{ steps.serialize.output.serialized }}
