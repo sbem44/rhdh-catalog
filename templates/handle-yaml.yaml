@@ -3,7 +3,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: handle-yaml
-  title: Handle YAML file
+  title: Handle YAML file v1.1
   description: Example template to retrieve and manipulate a YAML file
 spec:
   owner: roadie
@@ -86,4 +86,4 @@ spec:
         parser: "yaml"
 
   output:
-    yaml: ${{ steps.readfile.output.content }}
+    result: ${{ steps.readfile.output.content }}
