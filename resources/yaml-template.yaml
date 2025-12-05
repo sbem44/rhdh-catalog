@@ -1,0 +1,22 @@
+###### READONLY #########
+podSecurityContext:
+  fsGroup: 65534
+  runAsGroup: 65534
+  runAsNonRoot: true
+  runAsUser: 65534
+  seccompProfile:
+    type: RuntimeDefault
+##########################
+name: ""
+
+namespace: ""
+
+replicas: 1
+
+resources: {}
+  limits:
+    cpu: 200m
+    memory: 200Mi
+  requests:
+    cpu: 100m
+    memory: 100Mi
