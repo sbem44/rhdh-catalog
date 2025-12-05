@@ -3,7 +3,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: handle-yaml
-  title: Handle YAML file v2.2
+  title: Handle YAML file v2.3
   description: Example template to retrieve and manipulate a YAML file
 spec:
   owner: roadie
@@ -52,41 +52,41 @@ spec:
       name: Update name
       action: roadiehq:utils:merge
       input:
-        path: ${{ parameters.filePath}}
+        path: ${{ parameters.filePath }}
         content:
           name: ${{ parameters.name }}
     - id: update-namespace
       name: Update namespace
       action: roadiehq:utils:merge
       input:
-        path: ${{ parameters.filePath}}
+        path: ${{ parameters.filePath }}
         content:
           name: ${{ parameters.namespace }}
     - id: update-namespace
       name: Update namespace
       action: roadiehq:utils:merge
       input:
-        path: ${{ parameters.filePath}}
+        path: ${{ parameters.filePath }}
         content:
           namespace: ${{ parameters.namespace }}
     - id: update-cpu
       name: Update CPU
       action: roadiehq:utils:merge
       input:
-        path: ${{ parameters.filePath}}
+        path: ${{ parameters.filePath }}
         content:
           resources:
             limits:
-              cpu: ${{ parameters.cpu}}
+              cpu: ${{ parameters.cpu }}
     - id: read
       name: Read file
       action: roadiehq:utils:fs:parse
       input:
-        path: ${{ parameters.filePath}}
+        path: ${{ parameters.filePath }}
         parser: "yaml"
 
   output:
     text:
     - title: YAML file
       content: |
-           ${{ steps.readfile.output.content }}
+           ${{ steps.read.output.content }}
