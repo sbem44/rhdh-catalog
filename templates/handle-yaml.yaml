@@ -61,13 +61,6 @@ spec:
       input:
         path: ${{ parameters.filePath }}
         content:
-          name: ${{ parameters.namespace }}
-    - id: update-namespace
-      name: Update namespace
-      action: roadiehq:utils:merge
-      input:
-        path: ${{ parameters.filePath }}
-        content:
           namespace: ${{ parameters.namespace }}
     - id: update-cpu
       name: Update CPU

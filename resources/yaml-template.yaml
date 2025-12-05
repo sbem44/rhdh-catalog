@@ -13,7 +13,7 @@ namespace: ""
 
 replicas: 1
 
-resources: {}
+resources:
   limits:
     cpu: 800m
     memory: 200Mi
