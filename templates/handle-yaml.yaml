@@ -71,7 +71,7 @@ spec:
           namespace: ${{ parameters.namespace }}
     - id: update-cpu
       name: Update CPU
-      action: roadiehq:utils:json:merge
+      action: roadiehq:utils:merge
       input:
         path: ${{ parameters.filePath}}
         content:
