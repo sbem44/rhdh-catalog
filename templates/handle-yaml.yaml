@@ -78,18 +78,12 @@ spec:
           resources:
             limits:
               cpu: ${{ parameters.cpu}}
-    - id: publish-pr
-      name: Publish PR
-      action: publish:github:pull-request
+    - id: read
+      name: Read file
+      action: roadiehq:utils:fs:parse
       input:
-        repoUrl: github.com?repo=rhdh-catalog&owner=sbem44
-        branchName: main
-        title: Merge YAML into ${{ parameters.path }}
-        description: This PR was created by a Backstage scaffolder task
-    - id: log-message
-      name: Log PR URL
-      action: debug:log
-      input:
-        message: 'RemoteURL: ${{ steps["publish-pr"].output.remoteUrl }}'
+        path: ${{ parameters.filePath}}
+        parser: "yaml"
+
   output:
-    yaml: ${{ steps.serialize.output.serialized }}
+    yaml: ${{ steps.readfile.output.content }}
