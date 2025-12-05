@@ -1,0 +1,49 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: HTTP-testing
+  title: Http testing for POST and GET v4.4
+  description: Testing http request functionalities with POST and GET
+spec:
+  owner: a-team
+  ownedBy: group:default/a-team
+  type: service
+  parameters:
+    - title: Insert parameters 
+      properties:
+        functionalArea:
+          title: Functional area
+          type: string
+          description: The functional area of new project
+          ui:autofocus: true
+        category:
+          title: Category
+          type: string
+          ui:field: DynamicPickExtension
+          ui:options:
+            # IMPORTANT: The endpoint needs to return a JSON array of strings.
+            external_data: https://demo4654476.mockable.io/categories
+
+
+  steps:
+    - id: post-project
+      name: Create new project
+      action: http:backstage:request
+      input:
+        method: 'POST'
+        path: '/proxy/mockapi/api/v1/project'
+        headers:
+          content-type: 'application/json'
+        body:
+          area: ${{ parameters.functionalArea }}
+    - id: get-projects
+      name: Retrieve all projects
+      action: http:backstage:request
+      input:
+        method: 'GET'
+        path: '/proxy/mockapi/api/v1/project'
+  output:
+    text:
+    - title: Projects
+      content: |
+        `${{ steps['get-projects'].output.body | dump}}`

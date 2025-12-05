@@ -1,0 +1,55 @@
+---
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: conditional-step
+  title: Conditional step v1.0
+  description: test conditional fields 
+spec:
+  owner: a-team
+  ownedBy: group:default/a-team
+  type: service
+  parameters:
+    - title: Choose if last name is required 
+      properties:
+        includeLast:
+          title: Include last name?
+          type: boolean
+          default: true
+    - title: Write your name
+      required:
+        - name
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Unique name of the component
+          ui:autofocus: true
+      # 1. Conditional Field
+        lastName:
+          title: Last Name (Conditional)
+          type: string
+          description: Please enter your last name (only visible if 'Include Last Name' was checked).
+          
+          # KEY USAGE: ui:visibility: ${{ parameters.includeLast }}
+          # This uses JSONata to evaluate a previously gathered parameter.
+          # If parameters.includeLast is true, the field is visible.
+          # If it's false, the field is hidden, and its default value ("") will be used.
+          ui:visibility: ${{ parameters.includeLast }} 
+          
+          # Make the field required ONLY when it is visible.
+          required: true 
+          
+          # When using visibility on a field that exists in a previous step (like we did for lastName), 
+          # RJSF intelligently handles updating the value in the second step.
+  steps:
+    - id: log-hello-ref
+      name: Say hello
+      action: debug:log
+      input:
+        message: Hello ${{ parameters.lastName }}      
+  output:
+    text:
+    - title: Projects
+      content: |
+        `${{ steps['get-projects'].output.body | dump}}`

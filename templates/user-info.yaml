@@ -1,0 +1,49 @@
+---
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: user-info-test
+  title: User info testing v3.0
+  description: Testing retrive user info
+spec:
+  owner: a-team
+  ownedBy: group:default/a-team
+  type: service
+  parameters:
+    - title: Insert parameters 
+      properties:
+        functionalArea:
+          title: Functional area
+          type: string
+          description: The functional area of new project
+          ui:autofocus: true
+        category:
+          title: Category
+          type: string
+          ui:field: DynamicPickExtension
+          ui:options:
+            # IMPORTANT: The endpoint needs to return a JSON array of strings.
+            external_data: https://demo4654476.mockable.io/categories
+        componentOwner:
+          title: User
+          type: string
+          description: User that runs the template
+          default: ${{ user.ref }}
+          # ui:readonly: true
+          # ui:widget: hidden
+          ui:field: OwnerPicker
+         # ui:backstage:
+           # review:
+           #   show: false
+
+  steps:
+    - id: log-hello-ref
+      name: Say hello to the logged in user
+      action: debug:log
+      input:
+        message: Hello ${{ user.ref }}      
+  output:
+    text:
+    - title: Projects
+      content: |
+        `${{ steps['get-projects'].output.body | dump}}`
